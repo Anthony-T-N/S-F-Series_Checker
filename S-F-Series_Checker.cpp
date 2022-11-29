@@ -29,26 +29,51 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
 
         if (input_file_line.find("Started") != std::string::npos)
         {
-            input_file_line = input_file_line.substr(input_file_line.find("Started"));
+            started_vector.push_back(input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\""));
-            
             std::cout << i << ") " << input_file_line << "\n";
-            started_vector.push_back(input_file_line);
             final_vector.push_back(input_file_line);
             i++;
         }
         else if (input_file_line.find("Finished") != std::string::npos)
         {
-            input_file_line = input_file_line.substr(input_file_line.find("Finished"));
+            finished_vector.push_back(input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\""));
-
             std::cout << i << ") " << input_file_line << "\n";
-            finished_vector.push_back(input_file_line);
             final_vector.push_back(input_file_line);
             i++;
         }
     }
     input_file.close();
+
+    std::cout << "Debug Section" << "\n";
+    sort(started_vector.begin(), started_vector.end());
+    sort(finished_vector.begin(), finished_vector.end());
+
+    for (int i = 0; i <= started_vector.size(); i++)
+    {
+        std::cout << "i: " << i << "\n";
+        for (int j = 0; j <= finished_vector.size(); j++)
+        {
+            if (started_vector[i] == finished_vector[j])
+            {
+                started_vector.erase(started_vector.begin() + i);
+                finished_vector.erase(finished_vector.begin() + j);
+                i = 0;
+                break;
+            }
+        }
+    }
+    std::cout << "\nstarted_vector_Print:\n";
+    for (int i = 0; i <= started_vector.size() - 1; i++)
+    {
+        std::cout << started_vector[i] << "\n";
+    }
+    std::cout << "\nfinished_vector_Print:\n";
+    for (int i = 0; i <= finished_vector.size() - 1; i++)
+    {
+        std::cout << finished_vector[i] << "\n";
+    }
 
     sort(final_vector.begin(), final_vector.end());
     final_vector.erase(unique(final_vector.begin(), final_vector.end()), final_vector.end());
