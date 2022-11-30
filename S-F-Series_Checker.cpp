@@ -50,16 +50,17 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     sort(started_vector.begin(), started_vector.end());
     sort(finished_vector.begin(), finished_vector.end());
 
-    for (int i = 0; i <= started_vector.size(); i++)
+    for (int i = 0; i <= started_vector.size() - 1; i++)
     {
         std::cout << "i: " << i << "\n";
-        for (int j = 0; j <= finished_vector.size(); j++)
+        for (int j = 0; j <= finished_vector.size() - 1; j++)
         {
+            std::cout << started_vector[i] << " " << finished_vector[j] << "\n";
             if (started_vector[i] == finished_vector[j])
             {
                 started_vector.erase(started_vector.begin() + i);
                 finished_vector.erase(finished_vector.begin() + j);
-                i = 0;
+                i = -1;
                 break;
             }
         }
