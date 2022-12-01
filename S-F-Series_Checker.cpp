@@ -6,6 +6,7 @@
 #include <filesystem>
 #include <string>
 #include <map>
+#include <chrono>
 
 std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, std::string user_input)
 {
@@ -60,7 +61,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             {
                 started_vector.erase(started_vector.begin() + i);
                 finished_vector.erase(finished_vector.begin() + j);
-                i = -1;
+                i--;
                 break;
             }
         }
@@ -125,7 +126,13 @@ int main()
         }
     }
 
+    auto start = std::chrono::high_resolution_clock::now();
+
     line_checker(path_list_map, user_input);
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    std::cout << "\n" << duration.count() << " microseconds" << "\n";
 
     std::cout << "\n" << "[!] END" << "\n";
     std::cout << "[!] Exiting..." << "\n\n";
