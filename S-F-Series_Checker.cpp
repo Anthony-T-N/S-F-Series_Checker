@@ -21,7 +21,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     std::vector<std::string> finished_vector;
     std::vector<std::string> final_vector;
 
-    int i = 0;
+    int i = 1;
     while (std::getline(input_file, input_file_line))
     {
         // Line must either have "Started" or "Finished".
@@ -32,7 +32,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         {
             started_vector.push_back(input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\""));
-            std::cout << i << ") " << input_file_line << "\n";
+            std::cout << i << ")" << input_file_line << "\n";
             final_vector.push_back(input_file_line);
             i++;
         }
@@ -40,23 +40,22 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         {
             finished_vector.push_back(input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\""));
-            std::cout << i << ") " << input_file_line << "\n";
+            std::cout << i << ")" << input_file_line << "\n";
             final_vector.push_back(input_file_line);
             i++;
         }
     }
     input_file.close();
 
-    std::cout << "Debug Section" << "\n";
     sort(started_vector.begin(), started_vector.end());
     sort(finished_vector.begin(), finished_vector.end());
 
     for (int i = 0; i <= started_vector.size() - 1; i++)
     {
-        std::cout << "i: " << i << "\n";
+        //std::cout << "i: " << i << "\n";
         for (int j = 0; j <= finished_vector.size() - 1; j++)
         {
-            std::cout << started_vector[i] << " " << finished_vector[j] << "\n";
+            //std::cout << started_vector[i] << " " << finished_vector[j] << "\n";
             if (started_vector[i] == finished_vector[j])
             {
                 started_vector.erase(started_vector.begin() + i);
@@ -77,6 +76,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         std::cout << finished_vector[i] << "\n";
     }
 
+    /*
     sort(final_vector.begin(), final_vector.end());
     final_vector.erase(unique(final_vector.begin(), final_vector.end()), final_vector.end());
     std::cout << "\nFinal_Vector_Print:\n";
@@ -84,6 +84,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     {
         std::cout << final_vector[i] << "\n";
     }
+    */
 
     return input_file_line_vec;
 }
