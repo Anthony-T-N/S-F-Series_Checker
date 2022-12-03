@@ -45,7 +45,6 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             i++;
         }
     }
-    input_file.close();
 
     sort(started_vector.begin(), started_vector.end());
     sort(finished_vector.begin(), finished_vector.end());
@@ -75,6 +74,39 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     {
         std::cout << finished_vector[i] << "\n";
     }
+
+    int j = 1;
+    std::ifstream input_filet;
+    input_filet.open(path_list_map[std::stoi(user_input)]);
+    std::cout << "\n" << "[!] Selection: " << path_list_map[std::stoi(user_input)] << "\n\n";
+
+    while (std::getline(input_filet, input_file_line))
+    {
+        if (input_file_line.find("Started") != std::string::npos)
+        {
+            for (int i = 0; i <= started_vector.size() - 1; i++)
+            {
+                if (input_file_line.find(started_vector[i]) != std::string::npos)
+                {
+                    std::cout << j << ") " << "\033[32m" << input_file_line << "\033[0m" << "\n";
+                    break;
+                }
+            }
+        }
+        else if (input_file_line.find("Finished") != std::string::npos)
+        {
+            for (int i = 0; i <= finished_vector.size() - 1; i++)
+            {
+                if (input_file_line.find(finished_vector[i]) != std::string::npos)
+                {
+                    std::cout << j << ") " << "\033[31m" << input_file_line << "\033[0m" << "\n";
+                    break;
+                }
+            }
+        }
+        j++;
+    }
+    input_file.close();
 
     /*
     sort(final_vector.begin(), final_vector.end());
