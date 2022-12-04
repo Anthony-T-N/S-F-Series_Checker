@@ -44,6 +44,12 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             final_vector.push_back(input_file_line);
             i++;
         }
+        else
+        {
+            std::cout << "\033[31m" << "[!] Missing Start/Finish Key" << "\033[0m" << "\n";
+            std::cout << i << ")" << input_file_line << "\n";
+            i++;
+        }
     }
 
     sort(started_vector.begin(), started_vector.end());
@@ -78,7 +84,6 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     int j = 1;
     std::ifstream input_filet;
     input_filet.open(path_list_map[std::stoi(user_input)]);
-    std::cout << "\n" << "[!] Selection: " << path_list_map[std::stoi(user_input)] << "\n\n";
 
     while (std::getline(input_filet, input_file_line))
     {
@@ -88,7 +93,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             {
                 if (input_file_line.find(started_vector[i]) != std::string::npos)
                 {
-                    std::cout << j << ") " << "\033[32m" << input_file_line << "\033[0m" << "\n";
+                    std::cout << j << ") " << input_file_line << "\n";
                     break;
                 }
             }
