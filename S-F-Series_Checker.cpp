@@ -32,7 +32,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         {
             started_vector.push_back(input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\""));
-            std::cout << i << ")" << input_file_line << "\n";
+            //std::cout << i << ")" << input_file_line << "\n";
             final_vector.push_back(input_file_line);
             i++;
         }
@@ -40,7 +40,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         {
             finished_vector.push_back(input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\""));
-            std::cout << i << ")" << input_file_line << "\n";
+            //std::cout << i << ")" << input_file_line << "\n";
             final_vector.push_back(input_file_line);
             i++;
         }
@@ -81,6 +81,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         std::cout << finished_vector[i] << "\n";
     }
 
+    std::cout << "\n";
     int j = 1;
     std::ifstream input_filet;
     input_filet.open(path_list_map[std::stoi(user_input)]);
