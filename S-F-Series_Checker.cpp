@@ -70,6 +70,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             }
         }
     }
+    /*
     std::cout << "\nstarted_vector_Print:\n";
     for (int i = 0; i <= started_vector.size() - 1; i++)
     {
@@ -80,12 +81,12 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     {
         std::cout << finished_vector[i] << "\n";
     }
+    */
 
-    std::cout << "\n";
     int j = 1;
     std::ifstream input_filet;
     input_filet.open(path_list_map[std::stoi(user_input)]);
-
+    std::cout << "\n" << "[!] Start/Finish Vector" << "\n";
     while (std::getline(input_filet, input_file_line))
     {
         if (input_file_line.find("Started") != std::string::npos)
