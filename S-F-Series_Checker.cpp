@@ -130,6 +130,13 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
 
 int main()
 {
+    std::cout << "=======================================" << "\n";
+    std::cout << "- [S]-[F]-Series_Checker console application" << "\n";
+    std::cout << "- Console Application Version: 1.0" << "\n";
+    std::cout << "- Created By: Anthony-T-N." << "\n";
+    std::cout << "- Executable Location: " << std::filesystem::current_path() << "\n";
+    std::cout << "=======================================" << "\n\n";
+
     std::map<int, std::string> path_list_map;
     std::vector<std::string> url_list;
     std::string path = std::filesystem::current_path().generic_string();
@@ -175,7 +182,7 @@ int main()
     std::cout << "\n" << duration.count() << " microseconds" << "\n";
 
     std::cout << "\n" << "[!] END" << "\n";
-    std::cout << "[!] Exiting..." << "\n\n";
+    std::cout << "[!] Exiting..." << "\n";
     std::cin.get();
     return 0;
 }
