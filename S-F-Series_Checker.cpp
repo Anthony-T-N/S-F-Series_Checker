@@ -28,7 +28,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         // Based on "Started" or "Finished" text, place sub-text into correct vector.
         // Compare vectors for unique items.
 
-        if (input_file_line.find("Started") != std::string::npos)
+        if (input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos)
         {
             started_vector.push_back(input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\""));
@@ -36,7 +36,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             final_vector.push_back(input_file_line);
             i++;
         }
-        else if (input_file_line.find("Finished") != std::string::npos)
+        else if (input_file_line.find("Finished") != std::string::npos || input_file_line.find("<F>") != std::string::npos)
         {
             finished_vector.push_back(input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\""));
@@ -89,7 +89,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     std::cout << "\n" << "[!] Start/Finish Vector" << "\n";
     while (std::getline(input_filet, input_file_line))
     {
-        if (input_file_line.find("Started") != std::string::npos)
+        if (input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos)
         {
             for (int i = 0; i <= started_vector.size() - 1; i++)
             {
@@ -100,7 +100,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
                 }
             }
         }
-        else if (input_file_line.find("Finished") != std::string::npos)
+        else if (input_file_line.find("Finished") != std::string::npos || input_file_line.find("<F>") != std::string::npos)
         {
             for (int i = 0; i <= finished_vector.size() - 1; i++)
             {
