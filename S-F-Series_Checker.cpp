@@ -21,13 +21,14 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     std::vector<std::string> finished_vector;
     std::vector<std::string> final_vector;
 
+    bool switch_missing = false;
     int i = 1;
     while (std::getline(input_file, input_file_line))
     {
         // Line must either have "Started" or "Finished".
         // Based on "Started" or "Finished" text, place sub-text into correct vector.
         // Compare vectors for unique items.
-
+        
         if ((input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos) && input_file_line.find("S0") != std::string::npos)
         {
             started_vector.push_back(input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\"")));
@@ -46,8 +47,12 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         }
         else
         {
-            std::cout << "\033[31m" << "[!] Missing Start/Finish Key" << "\033[0m" << "\n";
-            std::cout << i << ")" << input_file_line << "\n";
+            if (switch_missing == false)
+            {
+                std::cout << "\033[31m" << "[!] Missing <S><F><SXX> Values" << "\033[0m" << "\n";
+                switch_missing = true;
+            }
+            std::cout << i << "] " << input_file_line << "\n";
             i++;
         }
     }
@@ -106,7 +111,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             {
                 if (input_file_line.find(finished_vector[i]) != std::string::npos)
                 {
-                    std::cout << j << ") " << "\033[31m" << input_file_line << "\033[0m" << "\n";
+                    std::cout << j << "] " << "\033[31m" << input_file_line << "\033[0m" << "\n";
                     break;
                 }
             }
