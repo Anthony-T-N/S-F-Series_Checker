@@ -23,12 +23,18 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
 
     bool switch_missing = false;
     int i = 1;
+    std::string debug_string;
     while (std::getline(input_file, input_file_line))
     {
         // Line must either have "Started" or "Finished".
         // Based on "Started" or "Finished" text, place sub-text into correct vector.
         // Compare vectors for unique items.
         
+        if (input_file_line.find("S") != std::string::npos && isdigit(input_file_line.find("S") + 1) == true && isdigit(input_file_line.find("S") + 2) == true)
+        {
+            std::cout << "S0X" << "Found" << "\n";
+        }
+
         if ((input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos) && input_file_line.find("S0") != std::string::npos)
         {
             started_vector.push_back(input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\"")));
