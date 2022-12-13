@@ -30,10 +30,27 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         // Based on "Started" or "Finished" text, place sub-text into correct vector.
         // Compare vectors for unique items.
         
-        if (input_file_line.find("S") != std::string::npos && isdigit(input_file_line.find("S") + 1) == true && isdigit(input_file_line.find("S") + 2) == true)
+        std::cout << "=== DEBUG BOUNDARY ===" << "\n";
+        int pos = 0;
+        while (input_file_line.size() != pos)
         {
-            std::cout << "S0X" << "Found" << "\n";
+            if (input_file_line.size() > pos + 3)
+            {
+                std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << input_file_line[pos + 3] << "\n";
+            }
+            if (input_file_line[pos] == 'S' && isdigit(input_file_line[pos + 1]) && isdigit(input_file_line[pos + 2]) == true)
+            {
+                std::cout << "HELLO" << "\n";
+            }
+            if (input_file_line[pos] == 'S' && isdigit(input_file_line[pos + 1]) == true && isdigit(input_file_line[pos + 2]) == true)
+            {
+                std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << "\n";
+                std::cout << "S0X" << "Found" << "\n";
+                break;
+            }
+            pos++;
         }
+        std::cout << "=== DEBUG BOUNDARY ===" << "\n";
 
         if ((input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos) && input_file_line.find("S0") != std::string::npos)
         {
@@ -106,7 +123,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             {
                 if (input_file_line.find(started_vector[i]) != std::string::npos)
                 {
-                    std::cout << j << ") " << input_file_line << "\n";
+                    std::cout << j << "] " << input_file_line << "\n";
                     break;
                 }
             }
