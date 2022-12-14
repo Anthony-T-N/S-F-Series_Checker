@@ -34,19 +34,34 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         int pos = 0;
         while (input_file_line.size() != pos)
         {
-            if (input_file_line.size() > pos + 3)
+            if (input_file_line.size() > pos + 2)
             {
-                std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << input_file_line[pos + 3] << "\n";
-            }
-            if (input_file_line[pos] == 'S' && isdigit(input_file_line[pos + 1]) && isdigit(input_file_line[pos + 2]) == true)
-            {
-                std::cout << "HELLO" << "\n";
-            }
-            if (input_file_line[pos] == 'S' && isdigit(input_file_line[pos + 1]) == true && isdigit(input_file_line[pos + 2]) == true)
-            {
-                std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << "\n";
-                std::cout << "S0X" << "Found" << "\n";
-                break;
+                if (input_file_line[pos] == 'S')
+                {
+                    std::cout << input_file_line[pos];
+
+                    if (isdigit(input_file_line[pos + 1]) == true)
+                    {
+                        std::cout << input_file_line[pos + 1];
+
+                        if (isdigit(input_file_line[pos + 2]) == true)
+                        {
+                            std::cout << input_file_line[pos + 2];
+                        }
+                    }
+                }
+                //std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << "\n";
+                //std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << "\n";
+                if (input_file_line[pos] == 'S' && isdigit(input_file_line[pos + 1]) == true)
+                {
+                    std::cout << "HELLO" << "\n";
+                }
+                if (input_file_line[pos] == 'S' && isdigit(input_file_line[pos + 1]) == true && isdigit(input_file_line[pos + 2]) == true)
+                {
+                    std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << "\n";
+                    std::cout << "S0X" << "Found" << "\n";
+                    break;
+                }
             }
             pos++;
         }
