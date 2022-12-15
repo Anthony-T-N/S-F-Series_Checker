@@ -36,17 +36,22 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         {
             if (input_file_line.size() > pos + 2)
             {
+                std::cout << input_file_line[pos];
                 if (input_file_line[pos] == 'S')
                 {
-                    std::cout << input_file_line[pos];
+                    std::cout << "\n" << pos << "\n";
+                    //std::cout << input_file_line[pos];
+                    std::cout << "MARK 1" << "\n";
 
-                    if (isdigit(input_file_line[pos + 1]) == true)
+                    if (isdigit(input_file_line[pos + 1]) != true)
                     {
-                        std::cout << input_file_line[pos + 1];
+                        //std::cout << input_file_line[pos + 1];
+                        std::cout << "MARK 2" << "\n";
 
                         if (isdigit(input_file_line[pos + 2]) == true)
                         {
-                            std::cout << input_file_line[pos + 2];
+                            //std::cout << input_file_line[pos + 2];
+                            std::cout << "MARK 3" << "\n";
                         }
                     }
                 }
