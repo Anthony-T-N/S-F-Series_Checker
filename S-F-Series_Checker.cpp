@@ -31,6 +31,35 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         // Compare vectors for unique items.
         
         std::cout << "=== DEBUG BOUNDARY ===" << "\n";
+        std::cout << "DEBUG LINE: " << input_file_line << "\n";
+        std::cout << input_file_line[20] << "\n";
+        std::cout << input_file_line[21] << "\n";
+        std::cout << input_file_line[22] << "\n";
+
+        if (input_file_line[20] == 'S')
+        {
+            std::cout << "POS 20 is S" << "\n";
+        }
+        if (isdigit((int)input_file_line[21] - 48) == true)
+        {
+            std::cout << "POS 21 is digit" << "\n";
+        }
+        else
+        {
+            std::cout << "POS 21 is not digit" << "\n";
+            std::cout << input_file_line[21] << "\n";
+        }
+        if (isdigit((int)input_file_line[22] - 48) == true)
+        {
+            std::cout << "POS 22 is digital" << "\n";
+        }
+        else
+        {
+            std::cout << "POS 22 is not digit" << "\n";
+            std::cout << input_file_line[22] << "\n";
+        }
+
+
         int pos = 0;
         while (input_file_line.size() != pos)
         {
@@ -39,16 +68,16 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
                 std::cout << input_file_line[pos];
                 if (input_file_line[pos] == 'S')
                 {
-                    std::cout << "\n" << pos << "\n";
+                    std::cout << "\n" << "MARK 1" << "\n";
+                    std::cout << input_file_line[pos] << "\n";
                     //std::cout << input_file_line[pos];
-                    std::cout << "MARK 1" << "\n";
 
-                    if (isdigit(input_file_line[pos + 1]) != true)
+                    if (isdigit(input_file_line[pos + 1] - '0') == true)
                     {
-                        //std::cout << input_file_line[pos + 1];
                         std::cout << "MARK 2" << "\n";
+                        std::cout << input_file_line[pos + 1] << "\n";
 
-                        if (isdigit(input_file_line[pos + 2]) == true)
+                        if (isdigit(input_file_line[pos + 2] - '0') == true)
                         {
                             //std::cout << input_file_line[pos + 2];
                             std::cout << "MARK 3" << "\n";
