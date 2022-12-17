@@ -40,7 +40,10 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         {
             std::cout << "POS 20 is S" << "\n";
         }
-        if (isdigit((int)input_file_line[21] - 48) == true)
+        char delta = input_file_line[21];
+        int friendly = delta - '0';
+        std::cout << "HELLO: " << delta << "\n";
+        if (isdigit(delta))
         {
             std::cout << "POS 21 is digit" << "\n";
         }
@@ -49,7 +52,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             std::cout << "POS 21 is not digit" << "\n";
             std::cout << input_file_line[21] << "\n";
         }
-        if (isdigit((int)input_file_line[22] - 48) == true)
+        if (isdigit(input_file_line[22] - '0') == true)
         {
             std::cout << "POS 22 is digital" << "\n";
         }
