@@ -30,7 +30,8 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
         // Based on "Started" or "Finished" text, place sub-text into correct vector.
         // Compare vectors for unique items.
         int pos = 0;
-        bool s_found = false;
+        bool SXX_Found = false;
+        bool SXX_Without_SF_Found = false;
         while (input_file_line.size() != pos)
         {
             if (input_file_line.size() > pos + 2)
@@ -38,13 +39,18 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
                 if (input_file_line[pos] == 'S' && isdigit(input_file_line[pos + 1]) && isdigit(input_file_line[pos + 2]))
                 {
                     //std::cout << input_file_line[pos] << input_file_line[pos + 1] << input_file_line[pos + 2] << "\n";
-                    s_found = true;
+                    SXX_Found = true;
                     break;
                 }
             }
             pos++;
         }
-        if ((input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos) && s_found == true)
+        // If SXX not found but contains <S> or <F>
+        if ((SXX_Found == false) && input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos || input_file_line.find("Finished") != std::string::npos || input_file_line.find("<F>") != std::string::npos)
+        {
+            SXX_Without_SF_Found = true;
+        }
+        if (input_file_line.find("Started") != std::string::npos || input_file_line.find("<S>") != std::string::npos && SXX_Without_SF_Found == false)
         {
             started_vector.push_back(input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Started") + 7, input_file_line.find("\""));
@@ -52,7 +58,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
             final_vector.push_back(input_file_line);
             i++;
         }
-        else if ((input_file_line.find("Finished") != std::string::npos || input_file_line.find("<F>") != std::string::npos) && s_found == true)
+        else if (input_file_line.find("Finished") != std::string::npos || input_file_line.find("<F>") != std::string::npos && SXX_Without_SF_Found == false)
         {
             finished_vector.push_back(input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\"")));
             input_file_line = input_file_line.substr(input_file_line.find("Finished") + 8, input_file_line.find("\""));
@@ -67,9 +73,16 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
                 std::cout << "\033[31m" << "[!] Missing <S><F><SXX> Values" << "\033[0m" << "\n";
                 switch_missing = true;
             }
-            if (s_found == false)
+            if (SXX_Found == false)
             {
-                std::cout << i << "] " << input_file_line << " <SXX>" << "\n";
+                if (SXX_Without_SF_Found == false)
+                {
+                    std::cout << i << "] " << input_file_line << " <S><F><SXX>" << "\n";
+                }
+                else
+                {
+                    std::cout << i << "] " << input_file_line << " <SXX>" << "\n";
+                }
             }
             else
             {
