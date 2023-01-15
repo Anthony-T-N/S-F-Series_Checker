@@ -156,6 +156,7 @@ std::vector<std::string> line_checker(std::map<int, std::string> path_list_map, 
     input_file.close();
 
     /*
+    // Debugging purposes: Displays all items in final vector.
     sort(final_vector.begin(), final_vector.end());
     final_vector.erase(unique(final_vector.begin(), final_vector.end()), final_vector.end());
     std::cout << "\nFinal_Vector_Print:\n";
@@ -219,6 +220,8 @@ int main()
 
     auto stop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(stop - start);
+    std::cout << "\n" << "=======================================" << "\n";
+
     std::cout << "\n" << duration.count() << " microseconds" << "\n";
 
     std::cout << "\n" << "[!] END" << "\n";
@@ -228,7 +231,7 @@ int main()
 }
 
 /*
-* 
+
 Project Planand Design
 
 Brief : Console application reads text file and flags unique lines.
